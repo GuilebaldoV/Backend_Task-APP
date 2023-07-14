@@ -23,6 +23,7 @@ export const CreateTask=async(req,res)=>{
 }
 
 export const deleteTask=async(req,res)=>{
+    console.log(req.params.id,"holaaa?")
     const task=await Task.findByIdAndDelete(req.params.id)
     if (!task) return res.status(404).json({"Message":"No task found"})
     res.sendStatus(202)

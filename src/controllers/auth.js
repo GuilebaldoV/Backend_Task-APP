@@ -2,6 +2,7 @@ import User from "../models/user.models.js"
 import bcryptjs from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { createToken } from "../libs/jwt.js"
+import { SECRET_TOKEN } from "../config.js"
 
 export const register=async (req,res)=>{
     
@@ -94,4 +95,23 @@ export const profile=async (req,res)=>{
         console.log(error);
         return res.status(500).json({ message: "Internal server error" });
       }
+}
+
+export const verifyToken=(req,res)=>{
+    const {token}=req.cookies;
+   console.log("verificando token")
+    if(!token) return res.status(401).json({message:"Unauthorized"})
+    jwt.verify(token,SECRET_TOKEN,async(err,user)=>{
+        if(err) return res.status(401).json({message:"Unauthorized"})
+        
+        const userFound=await User.findById(user.id);
+        if(!userFound) return res.status(401).json({message:"Not found"})
+
+        return res.json({
+            id:userFound._id,
+            usernarme:userFound.username,
+            email:userFound.email
+        })
+
+    })
 }

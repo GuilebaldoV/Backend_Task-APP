@@ -33,3 +33,15 @@ hacemos la peticion de registro yyy creamos un contexto
 para tener toodos los datos del usuario a la mano 
 tambien tener una propiedad de isAuthenticated
 configuramos el register y login
+
+Despues añadimos rutas protegidas!!
+Esto lo hacemos en un componente en react router que encierra a estas rutas protegidas!
+
+Algo muy importante es hacer un useEffect en el authContext
+Esto para que este checando constantemente el token
+Algo sumamente importante esque tenemos que configurar a axios
+para que axios lea las cookies es necesario configurarlo para esto
+y en el backend poner crdentials en true
+
+Una ves terminamoos eso hacemos el crud
+creammos un contexto para las tareas

@@ -11,7 +11,7 @@ app.use(morgan("dev"))
 app.use(express.json());
 app.use(cookieParser())
 app.use(cors({
-    origin:'*',
+    origin: ['http://localhost:5173', 'http://otro-dominio.com'],
     credentials:true
 }))
 // para que al principio haya "api"

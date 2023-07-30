@@ -8,6 +8,7 @@ export const register=async (req,res)=>{
     
     try {
         const {email,password,username}=req.body
+        // console.log(req.)
         // Error duplicacion
         const userFound= await User.findOne({email})
         if(userFound) return res.status(400).json(["The email is alredy in use"])
@@ -25,6 +26,7 @@ export const register=async (req,res)=>{
         const userSaved=await newUser.save()
         // creacion del token
         const token=await createToken({id:userSaved._id});
+        console.log("TOKEN",token)
         res.cookie("token",token)
         // devolver estos datos para el frontend
         
@@ -99,8 +101,10 @@ export const profile=async (req,res)=>{
 
 export const verifyToken=(req,res)=>{
     const {token}=req.cookies;
+    console.log(req.cookies,"VERIFICANDO SI VIENE TOKEN")
    console.log("verificando token")
-    if(!token) return res.status(401).json({message:"Unauthorized"})
+    
+   if(!token) return res.status(401).json({message:"Unauthorized"})
     jwt.verify(token,SECRET_TOKEN,async(err,user)=>{
         if(err) return res.status(401).json({message:"Unauthorized"})
         

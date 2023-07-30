@@ -11,7 +11,7 @@ app.use(morgan("dev"))
 app.use(express.json());
 app.use(cookieParser())
 app.use(cors({
-    origin:'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://frontenttask-app-production.up.railway.app'],
     credentials:true
 }))
 // para que al principio haya "api"

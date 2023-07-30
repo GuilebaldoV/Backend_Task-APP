@@ -5,7 +5,7 @@ export const authRequired=(req,res,next)=>{
     console.log("validation")
     // validando el token
     const {token}= req.cookies;
-    console.log(req.cookies,"validateToken")
+    console.log(req.cookies,"validateToken",req)
     if(!token) return res.status(401).json({message:"No token, authorization denied"})
 
     jwt.verify(token,SECRET_TOKEN,(err,user)=>{

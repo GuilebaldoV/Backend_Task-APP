@@ -27,7 +27,12 @@ export const register=async (req,res)=>{
         // creacion del token
         const token=await createToken({id:userSaved._id});
         console.log("TOKEN",token)
-        res.cookie("token",token)
+        // res.cookie("token",token)
+        res.cookie("token", token, {
+            sameSite: "None",
+            secure: true,
+            // otras opciones si es necesario
+          });
         // devolver estos datos para el frontend
         
         res.json({

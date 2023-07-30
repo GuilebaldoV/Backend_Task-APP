@@ -61,8 +61,11 @@ export const login=async (req,res)=>{
         if (!isMatch) return res.status(400).json(["Invalid credentials"])
         // creacion del token
         const token=await createToken({id:userFound._id});
-        res.cookie("token",token)
-        // devolver estos datos para el frontend
+        res.cookie("token", token, {
+            sameSite: "None",
+            secure: true,
+            // otras opciones si es necesario
+          });        // devolver estos datos para el frontend
         
         res.json({
             id:userFound._id,
